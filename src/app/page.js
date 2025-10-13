@@ -130,7 +130,7 @@ export default function Page() {
     {
       title: "Freelancing Platform",
       subtitle: "Full-stack two-sided marketplace",
-      desc: "Built with React, Node.js and Stripe. Features include escrow payments, real-time chat and project tracking.",
+      desc: "Built with React, Node.js and Express.",
       url: "https://drive.google.com/file/d/1beJlCN6ae6wH4MQM9Qzc4fy1zRGwZzvz/view",
       tags: ["React", "Node.js", "Stripe", "Real-time Chat"],
     },
@@ -404,7 +404,7 @@ export default function Page() {
               <p className={`text-center mb-8 text-lg leading-relaxed ${
                 darkMode ? "" : "text-gray-700"
               }`}>
-                Interested in working together or have questions? Send me a message and I'll get back to you soon.
+                Interested in working together or have questions? Send me a message and I&apos;ll get back to you soon.
               </p>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -511,7 +511,7 @@ export default function Page() {
                       darkMode ? "bg-green-500/20 text-green-400" : "bg-green-100 text-green-700"
                     }`}
                   >
-                    Thank you for your message! I'll get back to you soon.
+                    Thank you for your message! I&apos;ll get back to you soon.
                   </motion.div>
                 )}
               </form>
