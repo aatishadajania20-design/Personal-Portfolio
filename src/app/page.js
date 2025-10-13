@@ -277,7 +277,7 @@ export default function Page() {
             transition={{ delay: 0.4 }}
           >
             <a
-              href="https://drive.google.com/uc?export=download&id=1beJlCN6ae6wH4MQM9Qzc4fy1zRGwZzvz"
+              href="https://drive.google.com/file/d/1Qk8d29kG-30LfKpdEke4_Rqv0s1J3Npv/view?usp=sharing"
               className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
             >
               <FaDownload /> Download Résumé
