@@ -20,11 +20,11 @@ import Typed from "typed.js";
    Scroll reveal wrapper
 ---------------------------------------------------------- */
 const Reveal = ({ children, delay = 0 }) => {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.25, triggerOnce: true });
   return (
     <div ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay, ease: "easeOut" }}
       >
@@ -133,12 +133,14 @@ export default function Page() {
       desc: "Built with React, Node.js and Express.",
       url: "https://drive.google.com/file/d/1beJlCN6ae6wH4MQM9Qzc4fy1zRGwZzvz/view",
       tags: ["React", "Node.js", "Stripe", "Real-time Chat"],
+      gradient: "from-indigo-600 to-purple-700"
     },
     {
       title: "Performance Marketing – Elinor Jewels",
       subtitle: "End-to-end ad-funnel design",
       desc: "Planned and executed Meta + Google campaigns and ran iterative A/B creative tests.",
       tags: ["Meta Ads", "Google Ads", "A/B Testing", "Growth Marketing"],
+      gradient: "from-pink-500 to-rose-600"
     },
     {
       title: "Customer Churn Prediction",
@@ -146,6 +148,7 @@ export default function Page() {
       desc: "Built a Streamlit app using Random Forest models to predict customer churn with 80% accuracy. Features interactive visualizations and real-time predictions.",
       url: "https://telco-churn-prediction1.streamlit.app/",
       tags: ["Python", "Random Forest", "Streamlit", "Machine Learning"],
+      gradient: "from-blue-600 to-cyan-600"
     },
   ];
 
@@ -167,7 +170,7 @@ export default function Page() {
         className={`min-h-screen transition-colors duration-500 ${
           darkMode 
             ? "bg-gray-950 text-white" 
-            : "bg-gradient-to-br from-slate-50 via-blue-50 to-amber-50 text-gray-800"
+            : "bg-gray-50 text-gray-900"
         }`}
       >
         {/* Scroll to Top Button */}
@@ -178,7 +181,7 @@ export default function Page() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               onClick={scrollToTop}
-              className="fixed bottom-6 right-6 z-50 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl"
+              className="fixed bottom-6 right-6 z-50 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg transition-all hover:scale-110 hover:shadow-xl"
             >
               <FaArrowUp />
             </motion.button>
@@ -221,114 +224,131 @@ export default function Page() {
         </button>
 
         {/* Hero */}
-        <header className="max-w-6xl mx-auto px-6 pt-24 pb-32">
-          <div className="flex justify-between items-baseline">
-            <motion.h1 
-              className="text-4xl md:text-5xl font-bold"
+        <header className={`relative flex min-h-screen items-center justify-center overflow-hidden px-6 ${
+          darkMode ? "" : "bg-gray-50"
+        }`}>
+          {/* Animated gradient orbs for light mode */}
+          {!darkMode && (
+            <>
+              <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-br from-yellow-200 to-indigo-200 opacity-40 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 opacity-40 blur-3xl" />
+            </>
+          )}
+
+          <div className="relative z-10 text-center max-w-6xl mx-auto">
+            <div className="flex justify-between items-baseline mb-12">
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Aatish Adajania
+              </motion.h1>
+              <div className="hidden md:flex items-center gap-4 text-2xl">
+                {[
+                  { icon: FaLinkedin, href: "https://www.linkedin.com/in/aatish-adajania-694566268" },
+                  { icon: FaEnvelope, href: "mailto:aatishadajania20@gmail.com" },
+                  { icon: FaGithub, href: "https://github.com/aatishadajania" },
+                ].map(({ icon: Icon, href }, index) => (
+                  <motion.a
+                    key={href}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
+                    className={`transition-transform hover:scale-110 ${
+                      darkMode ? "hover:text-yellow-400" : "hover:text-indigo-600"
+                    }`}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 + 0.5 }}
+                  >
+                    <Icon />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            <p id="typed-role" className="mt-3 text-xl md:text-2xl min-h-[1.5em]" />
+
+            <motion.p 
+              className={`mt-6 max-w-3xl mx-auto leading-relaxed text-lg ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              I am an MBA (Business Analytics) candidate at SVNIT and an IT
+              graduate who combines full-stack development with digital-marketing
+              analytics to build and grow digital products.
+            </motion.p>
+
+            <motion.div 
+              className="mt-8 flex flex-wrap gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ delay: 0.4 }}
             >
-              Aatish Adajania
-            </motion.h1>
-            <div className="hidden md:flex items-center gap-4 text-2xl">
-              {[
-                { icon: FaLinkedin, href: "https://www.linkedin.com/in/aatish-adajania-694566268" },
-                { icon: FaEnvelope, href: "mailto:aatishadajania20@gmail.com" },
-                { icon: FaGithub, href: "https://github.com/aatishadajania" },
-              ].map(({ icon: Icon, href }, index) => (
-                <motion.a
-                  key={href}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  className={`transition-transform hover:scale-110 ${
-                    darkMode ? "hover:text-yellow-400" : "hover:text-orange-500"
-                  }`}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 + 0.5 }}
-                >
-                  <Icon />
-                </motion.a>
-              ))}
-            </div>
+              <a
+                href="https://drive.google.com/file/d/1Qk8d29kG-30LfKpdEke4_Rqv0s1J3Npv/view?usp=sharing"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-4 font-semibold text-black shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+              >
+                <FaDownload /> Download Résumé
+              </a>
+              <a
+                href="https://www.linkedin.com/in/aatish-adajania-694566268"
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold transition-all hover:scale-105 hover:shadow-lg ${
+                  darkMode 
+                    ? "bg-white/10 ring-1 ring-white/20 backdrop-blur hover:bg-white/20 text-white" 
+                    : "bg-white ring-1 ring-gray-200 shadow-lg hover:bg-gray-50 text-gray-900"
+                }`}
+              >
+                <FaLinkedin className={darkMode ? "text-blue-300" : "text-blue-600"} /> Connect on LinkedIn
+              </a>
+            </motion.div>
           </div>
 
-          <p id="typed-role" className="mt-3 text-lg min-h-[1.5em]" />
-
-          <motion.p 
-            className={`mt-6 max-w-3xl leading-relaxed ${
-              darkMode ? "" : "text-gray-700"
-            }`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            I am an MBA (Business Analytics) candidate at SVNIT and an IT
-            graduate who combines full-stack development with digital-marketing
-            analytics to build and grow digital products.
-          </motion.p>
-
-          <motion.div 
-            className="mt-8 flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <a
-              href="https://drive.google.com/file/d/1Qk8d29kG-30LfKpdEke4_Rqv0s1J3Npv/view?usp=sharing"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-            >
-              <FaDownload /> Download Résumé
-            </a>
-            <a
-              href="https://www.linkedin.com/in/aatish-adajania-694566268"
-              target="_blank"
-              rel="noreferrer"
-              className={`inline-flex items-center gap-2 rounded-lg border px-6 py-3 font-semibold transition-all hover:scale-105 hover:shadow-lg ${
-                darkMode 
-                  ? "border-gray-600 hover:bg-gray-800" 
-                  : "border-gray-300 hover:bg-white shadow-md"
-              }`}
-            >
-              <FaLinkedin /> Connect on LinkedIn
-            </a>
-          </motion.div>
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <div className={`h-6 w-3 rounded-full border ${
+              darkMode ? "border-white/40" : "border-gray-400"
+            }`}>
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ repeat: Infinity, duration: 1.6 }}
+                className={`mx-auto mt-1 h-2 w-1 rounded-full ${
+                  darkMode ? "bg-white/60" : "bg-gray-600"
+                }`}
+              />
+            </div>
+          </div>
         </header>
 
-        <hr className={darkMode ? "border-gray-700" : "border-gray-300"} />
-
         {/* Projects */}
-        <section className="max-w-6xl mx-auto px-6 py-20">
+        <section className="max-w-6xl mx-auto px-6 py-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold">Project Work</h2>
+            <h2 className={`text-4xl md:text-5xl font-bold text-center ${
+              darkMode ? "" : "text-gray-800"
+            }`}>
+              Project Work
+            </h2>
           </Reveal>
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.1}>
                 <motion.div 
-                  className={`group p-6 rounded-xl border h-full flex flex-col transition-all duration-300 hover:shadow-xl backdrop-blur-sm ${
-                    darkMode 
-                      ? "border-gray-700 hover:border-yellow-400 bg-gray-900/50" 
-                      : "border-gray-300 hover:border-orange-400 bg-white/70 shadow-sm"
-                  }`}
+                  className={`group relative overflow-hidden rounded-3xl p-8 text-white shadow-2xl h-full flex flex-col bg-gradient-to-br ${p.gradient}`}
                   whileHover={{ y: -5 }}
                 >
                   <div className="flex-1">
-                    <h3 className={`text-xl font-semibold transition-colors ${
-                      darkMode ? "group-hover:text-yellow-500" : "group-hover:text-orange-500"
-                    }`}>
-                      {p.title}
-                    </h3>
-                    <p className={`text-sm font-medium mt-2 ${
-                      darkMode ? "text-yellow-500" : "text-orange-500"
-                    }`}>
+                    <h3 className="text-2xl font-bold">{p.title}</h3>
+                    <p className="text-sm font-medium mt-2 opacity-90">
                       {p.subtitle}
                     </p>
-                    <p className={`mt-4 leading-relaxed ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}>
+                    <p className="mt-4 leading-relaxed opacity-90">
                       {p.desc}
                     </p>
                     
@@ -337,11 +357,7 @@ export default function Page() {
                       {p.tags.map((tag, tagIndex) => (
                         <span 
                           key={tag}
-                          className={`text-xs px-2 py-1 rounded-full border ${
-                            darkMode 
-                              ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" 
-                              : "bg-orange-500/10 text-orange-600 border-orange-500/20"
-                          }`}
+                          className="text-xs px-3 py-1 rounded-full bg-white/20 backdrop-blur border border-white/30"
                         >
                           {tag}
                         </span>
@@ -354,12 +370,10 @@ export default function Page() {
                       href={p.url}
                       target="_blank"
                       rel="noreferrer"
-                      className={`mt-6 inline-flex items-center gap-2 text-sm font-medium transition-colors group/link ${
-                        darkMode ? "text-yellow-500 hover:text-yellow-400" : "text-orange-500 hover:text-orange-400"
-                      }`}
+                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-sm font-semibold backdrop-blur hover:bg-white/30 transition-all"
                     >
                       View Live Demo
-                      <FaExternalLinkAlt className="group-hover/link:translate-x-1 transition-transform" />
+                      <FaExternalLinkAlt className="group-hover:translate-x-1 transition-transform" />
                     </a>
                   )}
                 </motion.div>
@@ -368,21 +382,25 @@ export default function Page() {
           </div>
         </section>
 
-        <hr className={darkMode ? "border-gray-700" : "border-gray-300"} />
-
         {/* Skills */}
-        <section className="max-w-6xl mx-auto px-6 py-20">
+        <section className={`py-24 px-6 ${
+          darkMode ? "bg-white/5" : "bg-gray-100"
+        }`}>
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold">Core Competencies</h2>
+            <h2 className={`text-4xl md:text-5xl font-bold text-center ${
+              darkMode ? "" : "text-gray-800"
+            }`}>
+              Core Competencies
+            </h2>
           </Reveal>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-16 flex flex-wrap gap-4 justify-center max-w-4xl mx-auto">
             {skills.map((s, i) => (
               <Reveal key={s} delay={i * 0.03}>
                 <motion.span 
-                  className={`rounded-full px-5 py-2 text-sm font-medium backdrop-blur-sm cursor-default transition-all ${
+                  className={`rounded-2xl p-6 text-center font-medium backdrop-blur transition-all ${
                     darkMode 
-                      ? "border border-gray-600 bg-gray-900/50 hover:border-yellow-400 hover:text-yellow-500" 
-                      : "border border-gray-300 bg-white/70 shadow-sm hover:border-orange-400 hover:text-orange-500"
+                      ? "bg-white/5 ring-1 ring-white/10 hover:bg-white/10 hover:scale-105" 
+                      : "bg-white ring-1 ring-gray-200 shadow-lg hover:shadow-xl hover:scale-105"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -395,14 +413,18 @@ export default function Page() {
         </section>
 
         {/* Contact */}
-        <section className="max-w-4xl mx-auto px-6 py-20">
+        <section className="max-w-4xl mx-auto px-6 py-24">
           <Reveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
+            <h2 className={`text-4xl md:text-5xl font-bold text-center mb-12 ${
+              darkMode ? "" : "text-gray-800"
+            }`}>
+              Get In Touch
+            </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="max-w-2xl mx-auto">
               <p className={`text-center mb-8 text-lg leading-relaxed ${
-                darkMode ? "" : "text-gray-700"
+                darkMode ? "text-gray-300" : "text-gray-600"
               }`}>
                 Interested in working together or have questions? Send me a message and I&apos;ll get back to you soon.
               </p>
@@ -410,11 +432,6 @@ export default function Page() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className={`block text-sm font-medium mb-2 ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}>
-                      Your Name
-                    </label>
                     <input
                       type="text"
                       id="name"
@@ -422,21 +439,16 @@ export default function Page() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none ${
+                      className={`w-full px-4 py-4 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                         darkMode 
-                          ? "bg-gray-800 border-gray-600 text-white focus:border-yellow-400 focus:ring-yellow-400/20" 
-                          : "bg-white border-gray-300 text-gray-900 focus:border-orange-400 focus:ring-orange-400/20"
+                          ? "bg-white/5 text-white placeholder-gray-400 ring-1 ring-white/10 focus:ring-yellow-400" 
+                          : "bg-white text-gray-900 placeholder-gray-500 ring-1 ring-gray-200 shadow-lg focus:ring-yellow-400"
                       }`}
-                      placeholder="Enter your name"
+                      placeholder="Your Name"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className={`block text-sm font-medium mb-2 ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}>
-                      Your Email
-                    </label>
                     <input
                       type="email"
                       id="email"
@@ -444,22 +456,17 @@ export default function Page() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none ${
+                      className={`w-full px-4 py-4 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                         darkMode 
-                          ? "bg-gray-800 border-gray-600 text-white focus:border-yellow-400 focus:ring-yellow-400/20" 
-                          : "bg-white border-gray-300 text-gray-900 focus:border-orange-400 focus:ring-orange-400/20"
+                          ? "bg-white/5 text-white placeholder-gray-400 ring-1 ring-white/10 focus:ring-yellow-400" 
+                          : "bg-white text-gray-900 placeholder-gray-500 ring-1 ring-gray-200 shadow-lg focus:ring-yellow-400"
                       }`}
-                      placeholder="Enter your email"
+                      placeholder="Your Email"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className={`block text-sm font-medium mb-2 ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}>
-                    Your Message
-                  </label>
                   <textarea
                     id="message"
                     name="message"
@@ -467,20 +474,20 @@ export default function Page() {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none resize-none ${
+                    className={`w-full px-4 py-4 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
                       darkMode 
-                        ? "bg-gray-800 border-gray-600 text-white focus:border-yellow-400 focus:ring-yellow-400/20" 
-                        : "bg-white border-gray-300 text-gray-900 focus:border-orange-400 focus:ring-orange-400/20"
+                        ? "bg-white/5 text-white placeholder-gray-400 ring-1 ring-white/10 focus:ring-yellow-400" 
+                        : "bg-white text-gray-900 placeholder-gray-500 ring-1 ring-gray-200 shadow-lg focus:ring-yellow-400"
                     }`}
-                    placeholder="Enter your message..."
+                    placeholder="Your Message"
                   />
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-3 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 px-8 py-4 font-semibold text-black shadow-lg transition-all hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                   >
@@ -491,10 +498,10 @@ export default function Page() {
                   <motion.button
                     type="button"
                     onClick={copyEmailToClipboard}
-                    className={`inline-flex items-center gap-3 rounded-lg border px-6 py-3 font-semibold transition-all hover:scale-105 hover:shadow-lg ${
+                    className={`inline-flex items-center gap-3 rounded-full px-6 py-3 font-semibold transition-all hover:scale-105 hover:shadow-lg ${
                       darkMode 
-                        ? "border-gray-600 hover:bg-gray-800" 
-                        : "border-gray-300 hover:bg-white shadow-md"
+                        ? "bg-white/10 ring-1 ring-white/20 backdrop-blur hover:bg-white/20 text-white" 
+                        : "bg-white ring-1 ring-gray-200 shadow-lg hover:bg-gray-50 text-gray-900"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -507,7 +514,7 @@ export default function Page() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`p-4 rounded-lg text-center ${
+                    className={`p-4 rounded-xl text-center ${
                       darkMode ? "bg-green-500/20 text-green-400" : "bg-green-100 text-green-700"
                     }`}
                   >
@@ -515,14 +522,47 @@ export default function Page() {
                   </motion.div>
                 )}
               </form>
+
+              {/* Social Links */}
+              <Reveal delay={0.25}>
+                <div className="mt-12 flex justify-center gap-6 text-2xl">
+                  <a
+                    href="mailto:aatishadajania20@gmail.com"
+                    aria-label="Email"
+                    className={`transition hover:scale-110 ${
+                      darkMode ? "text-gray-300 hover:text-yellow-300" : "text-gray-600 hover:text-indigo-600"
+                    }`}
+                  >
+                    <FaEnvelope />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/aatish-adajania-694566268"
+                    aria-label="LinkedIn"
+                    className={`transition hover:scale-110 ${
+                      darkMode ? "text-gray-300 hover:text-yellow-300" : "text-gray-600 hover:text-indigo-600"
+                    }`}
+                  >
+                    <FaLinkedin />
+                  </a>
+                  <a
+                    href="https://github.com/aatishadajania"
+                    aria-label="GitHub"
+                    className={`transition hover:scale-110 ${
+                      darkMode ? "text-gray-300 hover:text-yellow-300" : "text-gray-600 hover:text-indigo-600"
+                    }`}
+                  >
+                    <FaGithub />
+                  </a>
+                </div>
+              </Reveal>
             </div>
           </Reveal>
         </section>
 
         {/* Footer */}
-        <footer className={`border-t py-8 text-center ${
-          darkMode ? "border-gray-700" : "border-gray-300"
-        }`}>
+        <footer className={`py-8 text-center ${
+          darkMode ? "border-gray-800" : "border-gray-200"
+        } border-t`}>
           <div className="max-w-6xl mx-auto px-6">
             <p className={`text-sm ${
               darkMode ? "text-gray-400" : "text-gray-600"
