@@ -143,7 +143,7 @@ export default function Page() {
     {
       title: "Customer Churn Prediction",
       subtitle: "Machine Learning Web App",
-      desc: "Built a Streamlit app using Random Forest models to predict customer churn with 86% accuracy. Features interactive visualizations and real-time predictions.",
+      desc: "Built a Streamlit app using Random Forest models to predict customer churn with 80% accuracy. Features interactive visualizations and real-time predictions.",
       url: "https://telco-churn-prediction1.streamlit.app/",
       tags: ["Python", "Random Forest", "Streamlit", "Machine Learning"],
     },
