@@ -42,11 +42,6 @@ export default function Page() {
   const [darkMode, setDarkMode] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
   const typedRef = useRef(null);
@@ -100,28 +95,15 @@ export default function Page() {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => {
     setIsSubmitting(true);
-    setSubmitStatus("");
-    
-    // Simulate form submission
+    setSubmitStatus("sending");
+    // FormSubmit will handle the submission, we just show loading state
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-      
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus(""), 3000);
-    }, 1500);
+      setTimeout(() => setSubmitStatus(""), 5000);
+    }, 2000);
   };
 
   if (!mounted) return null;
@@ -440,7 +422,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Contact */}
+        {/* Contact - FormSubmit Version */}
         <section className="max-w-4xl mx-auto px-6 py-20">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
@@ -453,7 +435,19 @@ export default function Page() {
                 Interested in working together or have questions? Send me a message and I&apos;ll get back to you soon.
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {/* FormSubmit Form - WORKING VERSION */}
+              <form 
+                action="https://formsubmit.co/aatishadajania20@gmail.com" 
+                method="POST"
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
+                {/* FormSubmit Configuration */}
+                <input type="hidden" name="_subject" value="New Portfolio Message from Aatish's Website!" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://personal-portfolio-aatishadajania20-design.vercel.app/" />
+                
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className={`block text-sm font-medium mb-2 ${
@@ -465,8 +459,6 @@ export default function Page() {
                       type="text"
                       id="name"
                       name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
                       required
                       className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none ${
                         darkMode 
@@ -487,8 +479,6 @@ export default function Page() {
                       type="email"
                       id="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
                       required
                       className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none ${
                         darkMode 
@@ -509,8 +499,6 @@ export default function Page() {
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
                     required
                     rows={5}
                     className={`w-full px-4 py-3 rounded-lg border transition-all focus:ring-2 focus:outline-none resize-none ${
@@ -523,16 +511,14 @@ export default function Page() {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
-                  <motion.button
+                  <button
                     type="submit"
                     disabled={isSubmitting}
                     className="inline-flex items-center gap-3 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                    whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                   >
                     <FaPaperPlane /> 
                     {isSubmitting ? "Sending..." : "Send Message"}
-                  </motion.button>
+                  </button>
                   
                   <motion.button
                     type="button"
@@ -557,7 +543,19 @@ export default function Page() {
                       darkMode ? "bg-green-500/20 text-green-400" : "bg-green-100 text-green-700"
                     }`}
                   >
-                    Thank you for your message! I&apos;ll get back to you soon.
+                    ✅ Thank you! Your message has been sent successfully.
+                  </motion.div>
+                )}
+
+                {submitStatus === "sending" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-4 rounded-lg text-center ${
+                      darkMode ? "bg-blue-500/20 text-blue-400" : "bg-blue-100 text-blue-700"
+                    }`}
+                  >
+                    ⏳ Sending your message...
                   </motion.div>
                 )}
               </form>
