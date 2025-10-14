@@ -422,7 +422,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Contact - FormSubmit Version */}
+        {/* Contact - FormSubmit Version with Fixed Redirect */}
         <section className="max-w-4xl mx-auto px-6 py-20">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
@@ -435,7 +435,7 @@ export default function Page() {
                 Interested in working together or have questions? Send me a message and I&apos;ll get back to you soon.
               </p>
               
-              {/* FormSubmit Form - WORKING VERSION */}
+              {/* FormSubmit Form - UPDATED REDIRECT URL */}
               <form 
                 action="https://formsubmit.co/aatishadajania20@gmail.com" 
                 method="POST"
@@ -443,7 +443,7 @@ export default function Page() {
                 className="space-y-6"
               >
                 {/* FormSubmit Configuration */}
-                <input type="hidden" name="_subject" value="New Portfolio Message from Aatish's Website!" />
+                <input type="hidden" name="_subject" value="New Message from Portfolio Website" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="https://personal-portfolio-aatishadajania20-design.vercel.app/" />
