@@ -13,6 +13,7 @@ import {
   FaMoon,
   FaArrowUp,
   FaPaperPlane,
+  FaAward,
 } from "react-icons/fa";
 import Typed from "typed.js";
 
@@ -132,6 +133,25 @@ export default function Page() {
       tags: ["Python", "Random Forest", "Streamlit", "Machine Learning"],
       gradient: "from-blue-600 to-cyan-600"
     },
+  ];
+
+  const achievements = [
+    {
+      title: "Oracle Foundation Associate",
+      subtitle: "Oracle Cloud Infrastructure",
+      badgeUrl: "https://drive.google.com/file/d/1Sr56ExIHr_XFCZNiiGbJFxzOxuxx1JmA/view?usp=sharing",
+      certUrl: "https://drive.google.com/file/d/1jfuAN19Fr_PGQjEI_qqqdiW59fusjg-1/view?usp=sharing",
+      description: "Foundational knowledge of Oracle Cloud Infrastructure concepts and services",
+      tags: ["Cloud Computing", "OCI", "Infrastructure", "Oracle Cloud"]
+    },
+    {
+      title: "Oracle Generative AI Professional",
+      subtitle: "Generative AI & Machine Learning",
+      badgeUrl: "https://drive.google.com/file/d/1iltuT3w44U3exgQeI4y4YeCT9tz3XMnu/view?usp=sharing",
+      certUrl: "https://drive.google.com/file/d/1BualeqQU2Gq0rFkyKbRokPisZoeaS2a8/view?usp=sharing",
+      description: "Professional certification in Generative AI technologies and applications",
+      tags: ["Generative AI", "Machine Learning", "AI Professional", "Oracle AI"]
+    }
   ];
 
   const skills = [
@@ -398,7 +418,148 @@ export default function Page() {
 
         <hr className={darkMode ? "border-gray-700" : "border-gray-300"} />
 
-        {/* Skills - Reverted to Original */}
+        {/* Achievements - NEW SECTION */}
+        <section className="max-w-6xl mx-auto px-6 py-20">
+          <Reveal>
+            <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-3">
+              <FaAward className={darkMode ? "text-yellow-500" : "text-orange-500"} />
+              Certifications & Achievements
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            {achievements.map((achievement, i) => (
+              <Reveal key={achievement.title} delay={i * 0.1}>
+                {darkMode ? (
+                  // Dark Mode Card
+                  <motion.div 
+                    className={`group p-6 rounded-xl border h-full flex flex-col transition-all duration-300 hover:shadow-xl backdrop-blur-sm ${
+                      darkMode 
+                        ? "border-gray-700 hover:border-yellow-400 bg-gray-900/50" 
+                        : "border-gray-300 hover:border-orange-400 bg-white/70 shadow-sm"
+                    }`}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex-1">
+                      <h3 className={`text-xl font-semibold transition-colors ${
+                        darkMode ? "group-hover:text-yellow-500" : "group-hover:text-orange-500"
+                      }`}>
+                        {achievement.title}
+                      </h3>
+                      <p className={`text-sm font-medium mt-2 ${
+                        darkMode ? "text-yellow-500" : "text-orange-500"
+                      }`}>
+                        {achievement.subtitle}
+                      </p>
+                      <p className={`mt-4 leading-relaxed ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}>
+                        {achievement.description}
+                      </p>
+                      
+                      {/* Achievement Tags */}
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {achievement.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tag}
+                            className={`text-xs px-2 py-1 rounded-full border ${
+                              darkMode 
+                                ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" 
+                                : "bg-orange-500/10 text-orange-600 border-orange-500/20"
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Achievement Links */}
+                    <div className="mt-6 flex gap-4">
+                      <a
+                        href={achievement.badgeUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`inline-flex items-center gap-2 text-sm font-medium transition-colors group/link ${
+                          darkMode ? "text-yellow-500 hover:text-yellow-400" : "text-orange-500 hover:text-orange-400"
+                        }`}
+                      >
+                        View Badge
+                        <FaExternalLinkAlt className="group-hover/link:translate-x-1 transition-transform" />
+                      </a>
+                      <a
+                        href={achievement.certUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`inline-flex items-center gap-2 text-sm font-medium transition-colors group/link ${
+                          darkMode ? "text-yellow-500 hover:text-yellow-400" : "text-orange-500 hover:text-orange-400"
+                        }`}
+                      >
+                        View Certificate
+                        <FaExternalLinkAlt className="group-hover/link:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </motion.div>
+                ) : (
+                  // Light Mode Card
+                  <motion.div 
+                    className={`group relative overflow-hidden rounded-3xl p-8 text-white shadow-2xl h-full flex flex-col bg-gradient-to-br ${
+                      i === 0 ? "from-purple-600 to-blue-600" : "from-green-600 to-teal-600"
+                    }`}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold">{achievement.title}</h3>
+                      <p className="text-sm font-medium mt-2 opacity-90">
+                        {achievement.subtitle}
+                      </p>
+                      <p className="mt-4 leading-relaxed opacity-90">
+                        {achievement.description}
+                      </p>
+                      
+                      {/* Achievement Tags */}
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {achievement.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tag}
+                            className="text-xs px-3 py-1 rounded-full bg-white/20 backdrop-blur border border-white/30"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Achievement Links */}
+                    <div className="mt-6 flex gap-4">
+                      <a
+                        href={achievement.badgeUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur hover:bg-white/30 transition-all"
+                      >
+                        View Badge
+                        <FaExternalLinkAlt className="group-hover:translate-x-1 transition-transform" />
+                      </a>
+                      <a
+                        href={achievement.certUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur hover:bg-white/30 transition-all"
+                      >
+                        View Certificate
+                        <FaExternalLinkAlt className="group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <hr className={darkMode ? "border-gray-700" : "border-gray-300"} />
+
+        {/* Skills */}
         <section className="max-w-6xl mx-auto px-6 py-20">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold">Core Competencies</h2>
@@ -422,7 +583,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Contact - FormSubmit Version with CORRECT Redirect URL */}
+        {/* Contact */}
         <section className="max-w-4xl mx-auto px-6 py-20">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
@@ -435,7 +596,7 @@ export default function Page() {
                 Interested in working together or have questions? Send me a message and I&apos;ll get back to you soon.
               </p>
               
-              {/* FormSubmit Form - UPDATED WITH CORRECT URL */}
+              {/* FormSubmit Form */}
               <form 
                 action="https://formsubmit.co/aatishadajania20@gmail.com" 
                 method="POST"
