@@ -822,8 +822,8 @@ export default function Page() {
                   <SectionTitle color={T.white}>WHO I<br />AM</SectionTitle>
                 </Reveal>
                 {[
-                  <>I'm an <strong style={{ color: T.text, fontWeight: 500 }}>MBA (Business Analytics) candidate at SVNIT</strong> and an IT graduate who operates at the intersection of technology, data, and business strategy.</>,
-                  <>With hands-on experience as a <strong style={{ color: T.text, fontWeight: 500 }}>Digital Marketing Analyst</strong>, I've planned and executed end-to-end performance campaigns, designed data pipelines, and built full-stack products from scratch using React, Node.js, and Python.</>,
+                  <>I&apos;m an <strong style={{ color: T.text, fontWeight: 500 }}>MBA (Business Analytics) candidate at SVNIT</strong> and an IT graduate who operates at the intersection of technology, data, and business strategy.</>,
+                  <>With hands-on experience as a <strong style={{ color: T.text, fontWeight: 500 }}>Digital Marketing Analyst</strong>, I&apos;ve planned and executed end-to-end performance campaigns, designed data pipelines, and built full-stack products from scratch using React, Node.js, and Python.</>,
                   <>I believe the best digital products are both beautifully engineered and commercially minded — and that's exactly the kind of work I create.</>,
                 ].map((txt, i) => (
                   <Reveal key={i} delay={i * 0.1 + 0.2}>
@@ -1055,7 +1055,7 @@ export default function Page() {
               <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                 <Reveal>
                   <p style={{ color: T.muted, lineHeight: 1.9, maxWidth: 360, fontSize: "0.95rem" }}>
-                    Interested in collaborating, have a project in mind, or just want to connect? I'm always open to new conversations.
+                    Interested in collaborating, have a project in mind, or just want to connect? I&apos;m always open to new conversations.
                   </p>
                 </Reveal>
                 {[
