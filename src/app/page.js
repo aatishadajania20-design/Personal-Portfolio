@@ -824,7 +824,7 @@ export default function Page() {
                 {[
                   <>I&apos;m an <strong style={{ color: T.text, fontWeight: 500 }}>MBA (Business Analytics) candidate at SVNIT</strong> and an IT graduate who operates at the intersection of technology, data, and business strategy.</>,
                   <>With hands-on experience as a <strong style={{ color: T.text, fontWeight: 500 }}>Digital Marketing Analyst</strong>, I&apos;ve planned and executed end-to-end performance campaigns, designed data pipelines, and built full-stack products from scratch using React, Node.js, and Python.</>,
-                  <>I believe the best digital products are both beautifully engineered and commercially minded — and that's exactly the kind of work I create.</>,
+                  <>I believe the best digital products are both beautifully engineered and commercially minded — and that&apos;s exactly the kind of work I create.</>,
                 ].map((txt, i) => (
                   <Reveal key={i} delay={i * 0.1 + 0.2}>
                     <p style={{ marginBottom: "1.2rem", lineHeight: 1.9, color: T.muted, fontSize: "0.95rem" }}>{txt}</p>
@@ -1049,7 +1049,7 @@ export default function Page() {
         <section id="contact" style={{ position: "relative", zIndex: 10, padding: "8rem 4rem" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <Reveal><SectionLabel color={T.gold}>Get In Touch</SectionLabel></Reveal>
-            <Reveal delay={0.1}><SectionTitle color={T.white}>LET'S<br />TALK</SectionTitle></Reveal>
+            <Reveal delay={0.1}><SectionTitle color={T.white}>LET&apos;S<br />TALK</SectionTitle></Reveal>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
               {/* Left info */}
               <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
@@ -1107,7 +1107,7 @@ export default function Page() {
                       <FormField key={f.name} {...f} T={T} />
                     ))}
                   </div>
-                  <FormField name="subject" label="Subject" placeholder="What's this about?" type="text" T={T} />
+                  <FormField name="subject" label="Subject" placeholder="What&apos;s this about?" type="text" T={T} />
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                     <label style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.15em", color: T.muted }}>Message</label>
                     <textarea
